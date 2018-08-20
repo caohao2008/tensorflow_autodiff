@@ -67,16 +67,18 @@ Grad_map[v0]=Grad_map[v0]+Hat(v2)* d(v2)/d(v0)<br>
 Grad_map[v-1]=Grad_map[v-1]+Hat(v2)* d(v2)/d(v-1)<br>
 
 
-* 5.
+* 5.<br>
 Cur_node=v0<br>
 (pop完队列是[v-1])<br>
 v0的PreNode是x2，<br>
 Grad_map[x2]=Hat(v0)<br>
 
-* 6.
+* 6.<br>
 Cur_node=v-1<br>
 (pop完队列是[])<br>
 v-1的PreNode是x1，<br>
 Grad_map[x1]=Hat(v-1)<br>
 
+
 End
+------
