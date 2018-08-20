@@ -32,6 +32,7 @@ backward，找到结束的输出节点O
 
 推导<br>
 ----------
+```Java
 终点为v5。<br>
 Grad_map[v5]=y<br>
 
@@ -73,7 +74,7 @@ Grad_map[x2]=Hat(v0)<br>
 (pop完队列是[])<br>
 v-1的PreNode是x1，<br>
 Grad_map[x1]=Hat(v-1)<br>
-
+```
 
 End
 ------
