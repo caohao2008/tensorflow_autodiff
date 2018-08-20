@@ -1,5 +1,5 @@
 TensorFlow自动求导原理
-
+-------
 以"Automatic Differentiation in Machine Learning: a Survey"文章中的例子为例。
 
 ![autodiff](https://github.com/caohao2008/tensorflow_autodiff/blob/master/autodiff_1.png)
@@ -9,6 +9,7 @@ TensorFlow自动求导原理
 ![autodiff2](https://github.com/caohao2008/tensorflow_autodiff/blob/master/autodiff_2.png)
 
 算法伪代码<br>
+---------
   backward，找到结束的输出节点O<br>
   建立一个先进先出队列Queue<br>
   将输出节点放入队列：Queue=[]<br>
