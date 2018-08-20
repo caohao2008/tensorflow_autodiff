@@ -20,6 +20,7 @@ Grad_Map[node]=Hat(Cur_Node)*{ d(Cur_Node)/d(node) }
 if(neighbor 为input x):
 Grad_Map[x]=Hat(CurNode)
 推导
+
 终点为v5。
 Grad_map[v5]=y
 
