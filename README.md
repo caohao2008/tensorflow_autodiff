@@ -4,6 +4,10 @@ TensorFlow自动求导原理
 
 ![autodiff](https://github.com/caohao2008/tensorflow_autodiff/blob/master/autodiff_1.png)
 
+自动求导结果
+
+![autodiff2](https://github.com/caohao2008/tensorflow_autodiff/blob/master/autodiff_2.png)
+
 算法伪代码
 backward，找到结束的输出节点O
 建立一个先进先出队列Queue
