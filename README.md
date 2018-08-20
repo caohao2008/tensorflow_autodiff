@@ -9,18 +9,12 @@ TensorFlow自动求导原理
 ![autodiff2](https://github.com/caohao2008/tensorflow_autodiff/blob/master/autodiff_2.png)
 
 算法伪代码<br>
-backward，找到结束的输出节点O<br>
-
+	backward，找到结束的输出节点O<br>
 建立一个先进先出队列Queue<br>
-
 将输出节点放入队列：Queue=[]<br>
-
 将与O连接的点加入队列：Queue+=neigbor(O)<br>
-
 Grad_Map=[]<br>
-
 Grad_Map[head]=y<br>
-
 while(队列非空，未处理完）：
 Cur_Node = Queue.pop()
 Add_PreNode_to_Queue(Queue,Cur_Node) （注意：如果加过就不再重复加,并且不为input）
