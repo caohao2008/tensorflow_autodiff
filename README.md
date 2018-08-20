@@ -14,7 +14,7 @@ TensorFlow自动求导原理
 backward，找到结束的输出节点O
 建立一个先进先出队列Queue
   将输出节点放入队列：Queue=[]
-  将与O连接的点加入队列：Queue+=neigbor(O)
+  将与O连接的点加入队列：Queue+=preNode(O)
   Grad_Map=[]
   Grad_Map[head]=y
   while(队列非空，未处理完）：
