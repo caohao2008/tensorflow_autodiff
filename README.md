@@ -11,23 +11,23 @@ TensorFlow自动求导原理
 算法伪代码<br>
 ---------
 ```JAVA
-backward，找到结束的输出节点O<br>
-建立一个先进先出队列Queue<br>
-  将输出节点放入队列：Queue=[]<br>
-  将与O连接的点加入队列：Queue+=neigbor(O)<br>
-  Grad_Map=[]<br>
-  Grad_Map[head]=y<br>
-  while(队列非空，未处理完）：<br>
-    Cur_Node = Queue.pop()<br>
-    Add_PreNode_to_Queue(Queue,Cur_Node) （注意：如果加过就不再重复加,并且不为input）<br>
-    for node in PreNode(Node):<br>
-      if(Grad_Map.has_key(node)):<br>
-        Grad_Map[node]=Grad_Map[node] + Hat(Cur_Node)*{ d(Cur_Node)/d(node) }<br>
-      else:<br>
-        Grad_Map[node]=Hat(Cur_Node)*{ d(Cur_Node)/d(node) }<br>
-      if(neighbor 为input x):<br>
-        Grad_Map[x]=Hat(CurNode)<br>
-<br>
+backward，找到结束的输出节点O
+建立一个先进先出队列Queue
+  将输出节点放入队列：Queue=[]
+  将与O连接的点加入队列：Queue+=neigbor(O)
+  Grad_Map=[]
+  Grad_Map[head]=y
+  while(队列非空，未处理完）：
+    Cur_Node = Queue.pop()
+    Add_PreNode_to_Queue(Queue,Cur_Node) （注意：如果加过就不再重复加,并且不为input）
+    for node in PreNode(Node):
+      if(Grad_Map.has_key(node)):
+        Grad_Map[node]=Grad_Map[node] + Hat(Cur_Node)*{ d(Cur_Node)/d(node) }
+      else:
+        Grad_Map[node]=Hat(Cur_Node)*{ d(Cur_Node)/d(node) }
+      if(neighbor 为input x):
+        Grad_Map[x]=Hat(CurNode)
+
 ```
 
 推导<br>
@@ -52,28 +52,24 @@ Grad_map[v2]=Hat(v4)* d(v4)/d(v2)<br>
 将v3 PreNode加入队列[v1,v2,v0]<br>
 Grad_map[v0]=Hat(v3)* d(v3)/d(v0)<br>
 
-* 3.
-Cur_node=v1<br>
+* 3.Cur_node=v1<br>
 (pop完队列是[v2,v0])<br>
 将v1 PreNode加入队列[v2,v0,v-1]<br>
 Grad_map[v-1]=Hat(v1)* d(v1)/d(v-1)<br>
 
-* 4.
-Cur_node=v2<br>
+* 4.Cur_node=v2<br>
 (pop完队列是[v0,v-1])<br>
 将v2 PreNode加入队列[v0,v-1](-1和0都已经加过了)<br>
 Grad_map[v0]=Grad_map[v0]+Hat(v2)* d(v2)/d(v0)<br>
 Grad_map[v-1]=Grad_map[v-1]+Hat(v2)* d(v2)/d(v-1)<br>
 
 
-* 5.<br>
-Cur_node=v0<br>
+* 5.Cur_node=v0<br>
 (pop完队列是[v-1])<br>
 v0的PreNode是x2，<br>
 Grad_map[x2]=Hat(v0)<br>
 
-* 6.<br>
-Cur_node=v-1<br>
+* 6.Cur_node=v-1<br>
 (pop完队列是[])<br>
 v-1的PreNode是x1，<br>
 Grad_map[x1]=Hat(v-1)<br>
