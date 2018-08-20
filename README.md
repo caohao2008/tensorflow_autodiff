@@ -29,17 +29,18 @@ TensorFlow自动求导原理
 <br>
 推导<br>
 ---------
+---------<br>
 终点为v5。<br>
 Grad_map[v5]=y<br>
 
-*0.<br>
+* 0.<br>
 Cur_node=v5<br>
 (pop完队列是[v3])<br>
 将V5 PreNode加入队列 [v4,v3]<br>
 Grad_map[v4]=Hat(v5)* d(v5)/d(v4)<br>
 Grap_map[v3]=Hat(v5)* d(v5)/d(v3)<br>
 
-*1.
+* 1.
 Cur_node=v4<br>
 (pop完队列是[v3])<br>
 将V4 PreNode加入队列 [v3,v1,v2]<br>
