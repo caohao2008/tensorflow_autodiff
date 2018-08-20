@@ -15,31 +15,32 @@ TensorFlow自动求导原理
 将与O连接的点加入队列：Queue+=neigbor(O)<br>
 Grad_Map=[]<br>
 Grad_Map[head]=y<br>
-while(队列非空，未处理完）：
-Cur_Node = Queue.pop()
-Add_PreNode_to_Queue(Queue,Cur_Node) （注意：如果加过就不再重复加,并且不为input）
-for node in PreNode(Node):
-if(Grad_Map.has_key(node)):
-Grad_Map[node]=Grad_Map[node] + Hat(Cur_Node)*{ d(Cur_Node)/d(node) }
-else:
-Grad_Map[node]=Hat(Cur_Node)*{ d(Cur_Node)/d(node) }
-if(neighbor 为input x):
-Grad_Map[x]=Hat(CurNode)
-推导
+while(队列非空，未处理完）：<br>
+Cur_Node = Queue.pop()<br>
+Add_PreNode_to_Queue(Queue,Cur_Node) （注意：如果加过就不再重复加,并且不为input）<br>
+for node in PreNode(Node):<br>
+if(Grad_Map.has_key(node)):<br>
+Grad_Map[node]=Grad_Map[node] + Hat(Cur_Node)*{ d(Cur_Node)/d(node) }<br>
+else:<br>
+Grad_Map[node]=Hat(Cur_Node)*{ d(Cur_Node)/d(node) }<br>
+if(neighbor 为input x):<br>
+Grad_Map[x]=Hat(CurNode)<br>
+<br>
+推导<br>
 
-终点为v5。
-Grad_map[v5]=y
+终点为v5。<br>
+Grad_map[v5]=y<br>
 
-0.
-Cur_node=v5
-(pop完队列是[v3])
-将V5 PreNode加入队列 [v4,v3]
-Grad_map[v4]=Hat(v5)* d(v5)/d(v4)
-Grap_map[v3]=Hat(v5)* d(v5)/d(v3)
+0.<br>
+Cur_node=v5<br>
+(pop完队列是[v3])<br>
+将V5 PreNode加入队列 [v4,v3]<br>
+Grad_map[v4]=Hat(v5)* d(v5)/d(v4)<br>
+Grap_map[v3]=Hat(v5)* d(v5)/d(v3)<br>
 
 1.
-Cur_node=v4
-(pop完队列是[v3])
+Cur_node=v4<br>
+(pop完队列是[v3])<br>
 将V4 PreNode加入队列 [v3,v1,v2]
 Grad_map[v1]=Hat(v4)* d(v4)/d(v1)
 Grad_map[v2]=Hat(v4)* d(v4)/d(v2)
