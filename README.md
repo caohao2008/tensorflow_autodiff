@@ -41,40 +41,40 @@ Grap_map[v3]=Hat(v5)* d(v5)/d(v3)<br>
 1.
 Cur_node=v4<br>
 (pop完队列是[v3])<br>
-将V4 PreNode加入队列 [v3,v1,v2]
-Grad_map[v1]=Hat(v4)* d(v4)/d(v1)
-Grad_map[v2]=Hat(v4)* d(v4)/d(v2)
+将V4 PreNode加入队列 [v3,v1,v2]<br>
+Grad_map[v1]=Hat(v4)* d(v4)/d(v1)<br>
+Grad_map[v2]=Hat(v4)* d(v4)/d(v2)<br>
 
 2.
-Cur_node=v3
-(pop完队列是[v1,v2])
-将v3 PreNode加入队列[v1,v2,v0]
-Grad_map[v0]=Hat(v3)* d(v3)/d(v0)
+Cur_node=v3<br>
+(pop完队列是[v1,v2])<br>
+将v3 PreNode加入队列[v1,v2,v0]<br>
+Grad_map[v0]=Hat(v3)* d(v3)/d(v0)<br>
 
 3.
-Cur_node=v1
-(pop完队列是[v2,v0])
-将v1 PreNode加入队列[v2,v0,v-1]
-Grad_map[v-1]=Hat(v1)* d(v1)/d(v-1)
+Cur_node=v1<br>
+(pop完队列是[v2,v0])<br>
+将v1 PreNode加入队列[v2,v0,v-1]<br>
+Grad_map[v-1]=Hat(v1)* d(v1)/d(v-1)<br>
 
 4.
-Cur_node=v2
-(pop完队列是[v0,v-1])
-将v2 PreNode加入队列[v0,v-1](-1和0都已经加过了)
-Grad_map[v0]=Grad_map[v0]+Hat(v2)* d(v2)/d(v0)
-Grad_map[v-1]=Grad_map[v-1]+Hat(v2)* d(v2)/d(v-1)
+Cur_node=v2<br>
+(pop完队列是[v0,v-1])<br>
+将v2 PreNode加入队列[v0,v-1](-1和0都已经加过了)<br>
+Grad_map[v0]=Grad_map[v0]+Hat(v2)* d(v2)/d(v0)<br>
+Grad_map[v-1]=Grad_map[v-1]+Hat(v2)* d(v2)/d(v-1)<br>
 
 
 5.
-Cur_node=v0
-(pop完队列是[v-1])
-v0的PreNode是x2，
-Grad_map[x2]=Hat(v0)
+Cur_node=v0<br>
+(pop完队列是[v-1])<br>
+v0的PreNode是x2，<br>
+Grad_map[x2]=Hat(v0)<br>
 
 5.
-Cur_node=v-1
-(pop完队列是[])
-v-1的PreNode是x1，
-Grad_map[x1]=Hat(v-1)
+Cur_node=v-1<br>
+(pop完队列是[])<br>
+v-1的PreNode是x1，<br>
+Grad_map[x1]=Hat(v-1)<br>
 
 End
