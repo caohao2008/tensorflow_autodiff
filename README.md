@@ -10,6 +10,7 @@ TensorFlow自动求导原理
 
 算法伪代码<br>
 ---------
+```JAVA
 backward，找到结束的输出节点O<br>
 建立一个先进先出队列Queue<br>
   将输出节点放入队列：Queue=[]<br>
@@ -27,28 +28,26 @@ backward，找到结束的输出节点O<br>
       if(neighbor 为input x):<br>
         Grad_Map[x]=Hat(CurNode)<br>
 <br>
+```
 
 推导<br>
 ----------
 终点为v5。<br>
 Grad_map[v5]=y<br>
 
-* 0.<br>
-Cur_node=v5<br>
+* 0.Cur_node=v5<br>
 (pop完队列是[v3])<br>
 将V5 PreNode加入队列 [v4,v3]<br>
 Grad_map[v4]=Hat(v5)* d(v5)/d(v4)<br>
 Grap_map[v3]=Hat(v5)* d(v5)/d(v3)<br>
 
-* 1.<br>
-Cur_node=v4<br>
+* 1.Cur_node=v4<br>
 (pop完队列是[v3])<br>
 将V4 PreNode加入队列 [v3,v1,v2]<br>
 Grad_map[v1]=Hat(v4)* d(v4)/d(v1)<br>
 Grad_map[v2]=Hat(v4)* d(v4)/d(v2)<br>
 
-* 2.
-Cur_node=v3<br>
+* 2.Cur_node=v3<br>
 (pop完队列是[v1,v2])<br>
 将v3 PreNode加入队列[v1,v2,v0]<br>
 Grad_map[v0]=Hat(v3)* d(v3)/d(v0)<br>
