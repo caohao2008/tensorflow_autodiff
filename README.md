@@ -2,7 +2,7 @@ TensorFlow自动求导原理
 
 以"Automatic Differentiation in Machine Learning: a Survey"文章中的例子为例。
 
-![autodiff](http://https://github.com/caohao2008/tensorflow_autodiff/blob/master/autodiff_1.png)
+![autodiff](https://github.com/caohao2008/tensorflow_autodiff/blob/master/autodiff_1.png)
 
 算法伪代码
 backward，找到结束的输出节点O
