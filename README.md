@@ -32,7 +32,7 @@ backward，找到结束的输出节点O
 
 推导<br>
 ----------
-```Java
+```Text
 终点为v5。<br>
 Grad_map[v5]=y<br>
 
