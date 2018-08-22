@@ -48,4 +48,4 @@ while not node_queue.empty():
 	print node_queue
 print Grad_Map
 for k,v in zip(Grad_Map.iterkeys(),Grad_Map.itervalues()):
-	print k,v
+	print k+"="+v
