@@ -23,7 +23,6 @@ class Plus(Op):
 	
 	def backward(self):
 		print "backward plus"
-
  
 class Minus(Op):
 	def forward(self):
@@ -31,6 +30,14 @@ class Minus(Op):
 	
 	def backward(self):
 		print "backward minus"
+ 
+class Mult(Op):
+	def forward(self):
+                print "forward mult"
+	
+	def backward(self):
+		print "backward mult"
+
 
  
 class Sin(Op):
