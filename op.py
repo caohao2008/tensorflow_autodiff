@@ -8,11 +8,44 @@ class Op:
 	def backward(self):
 		print "backward"
 
-class plus(Op):
+class Assign:
+	def forward(self):
+		print "forward assign"
+	
+	def backward(self):
+		print "backward assign"
+
+
+
+class Plus(Op):
 	def forward(self):
                 print "forward plus"
 	
 	def backward(self):
 		print "backward plus"
+
+ 
+class Minus(Op):
+	def forward(self):
+                print "forward minus"
+	
+	def backward(self):
+		print "backward minus"
+
+ 
+class Sin(Op):
+	def forward(self):
+                print "forward sin"
+	
+	def backward(self):
+		print "backward sin"
+
+ 
+class Ln(Op):
+	def forward(self):
+                print "forward ln"
+	
+	def backward(self):
+		print "backward ln"
 
  
