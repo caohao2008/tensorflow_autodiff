@@ -28,10 +28,10 @@ def find_prenode_in_graph(graph,node):
 
 while not node_queue.empty():
 	cur_node = node_queue.get()
-	print cur_node
+	###print cur_node
 	#find pre node of cur_node
 	pre_nodes = find_prenode_in_graph(graph,cur_node)
-	print pre_nodes
+	###print pre_nodes
 	
 	for pre_node in pre_nodes:
 		if pre_node.startswith("x"):
@@ -45,7 +45,7 @@ while not node_queue.empty():
 			added_set.add(pre_node)
 			node_queue.put(pre_node)
 	
-	print node_queue
+	###print node_queue
 print Grad_Map
 for k,v in zip(Grad_Map.iterkeys(),Grad_Map.itervalues()):
 	print k+"="+v
