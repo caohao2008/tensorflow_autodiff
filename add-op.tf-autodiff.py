@@ -42,6 +42,7 @@ node_queue = Queue.Queue()
 
 Grad_Map={}
 Grad_Map["v5"]="y"
+
 node_queue.put("v5")
 added_set=set()
 
@@ -57,6 +58,7 @@ def find_prenode_in_graph(graph,node):
 	return result
 
 backward_expr_table={}
+backward_expr_table["v5"]=Expr("v5",Assign,"y")
 
 while not node_queue.empty():
 	cur_node = node_queue.get()
@@ -71,14 +73,16 @@ while not node_queue.empty():
 			expr=Expr(pre_node,Assign,cur_node)
 			backward_expr_table[pre_node]=expr
 			continue
+		expr1 = Expr("d("+cur_node+")/d("+pre_node+")",backward_compute_graph_table[cur_node+","+pre_node],pre_node)
+		expr2 = Expr(pre_node,Mult,expr1,cur_node)
 		if not Grad_Map.has_key(pre_node):
 			Grad_Map[pre_node]="Hat("+cur_node+")* d("+cur_node+")/d("+pre_node+")"
-			expr1 = Expr("d("+cur_node+")/d("+pre_node+")",backward_compute_graph_table[cur_node+","+pre_node],pre_node)
-			expr2 = Expr(pre_node,Mult,expr1)
 			#backward_expr_table[pre_node]=Expr(pre_node,Mult,backward_compute_graph_table[cur_node+","+pre_node])
 			backward_expr_table[pre_node]=expr2
 		else:
 			Grad_Map[pre_node]=Grad_Map[pre_node]+"+Hat("+cur_node+")* d("+cur_node+")/d("+pre_node+")"
+			expr3 = Expr(pre_node,Plus,backward_expr_table[pre_node],expr2)
+			backward_expr_table[pre_node]=expr3
 		if(not pre_node in added_set):
 			added_set.add(pre_node)
 			node_queue.put(pre_node)
