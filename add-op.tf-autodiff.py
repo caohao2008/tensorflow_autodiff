@@ -33,7 +33,7 @@ exe = Executor()
 ###not work , feed_dict is tensorflow based concept
 ###value_table = exe.execute(forward_expr_table,feed_dict={"x1":2,"x2":2,"y":3})
 forward_compute_graph,forward_input_table,backward_compute_graph_table = exe.buildComputation(forward_expr_table)
-value_table = exe.execute(forward_compute_graph,forward_input_table,{"x1":2,"x2":2,"y":3})
+value_table = exe.execute(forward_compute_graph,forward_input_table,{"x1":2,"x2":5,"y":3})
 
 #x1=Plus(v-1,3)
 #y=
@@ -58,7 +58,10 @@ def find_prenode_in_graph(graph,node):
 	return result
 
 backward_expr_table={}
-backward_expr_table["v5"]=Expr("v5",Assign,"y")
+backward_expr_table["v5"]=Expr("v5",ValueOf,"y")
+
+backward_queue = Queue.Queue() 
+backward_queue.put("v5") 
 
 while not node_queue.empty():
 	cur_node = node_queue.get()
@@ -86,6 +89,7 @@ while not node_queue.empty():
 		if(not pre_node in added_set):
 			added_set.add(pre_node)
 			node_queue.put(pre_node)
+			backward_queue.put(pre_node)
 	
 	###print node_queue
 print Grad_Map
@@ -96,3 +100,7 @@ print "backward_expr"
 for k,v in zip(backward_expr_table.iterkeys(),backward_expr_table.itervalues()):
 	print k+"="+str(v)
 
+
+#while not backward_queue.empty():
+#	print backward_queue.get()
+exe.executeBackward(backward_queue,backward_expr_table,value_table)

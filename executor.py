@@ -1,6 +1,7 @@
 import sys
 import os
 from op import *
+from expr import *
 
 class Executor:
 	def __init__(self):
@@ -15,11 +16,13 @@ class Executor:
 			print expr
 			forward_op_table[str(expr.output)]=expr.operator().forward
 			forward_input_table[str(expr.output)]=expr.inputs
+			index = 0
 			for input in expr.inputs:
-				backward_op_table[str(expr.output)+","+input]=expr.operator().backward
+				backward_op_table[str(expr.output)+","+input]=expr.operator().backward(input,index,expr.inputs)
+				index=index+1
 		print forward_op_table
 		print forward_input_table
-		print backward_op_table
+		print "backward op table ",backward_op_table
 		return forward_op_table,forward_input_table,backward_op_table
 	
 	def execute(self,forward_op_table,forward_input_table,_input_values):
@@ -52,3 +55,44 @@ class Executor:
 		
 		print "value_table = ",value_table
 		return value_table
+
+	def executeStep(self,op,inputs,_values):
+		print inputs
+		print _values
+		_inputs = []
+		for i in inputs:
+			if type(i) == str:
+				_inputs.append(_values[i])
+			elif isinstance(i,Expr):
+				print "Expr! Expr=",i
+				_inputs.append(self.executeStep(i.operator,i.inputs,_values))
+			else:
+				_inputs.append(i)
+		print "op ="+str(op)+" inputs="+str(_inputs)
+		if type(op)==int:
+			return op
+		elif type(op)==str:
+			return _values[op]
+		else:
+			return op().forward(_inputs)
+
+			
+	def executeBackward(self,backward_queue,backward_expr_table,_input_values):
+		new_value_table={}
+		while not backward_queue.empty():
+			cur_node = backward_queue.get()	
+			print cur_node
+			print backward_expr_table[cur_node]
+			expr = backward_expr_table[cur_node]
+			cur_inputs = []
+			for sub in expr.inputs:
+				if(isinstance(sub,Expr)):
+					result = self.executeStep(sub.operator,sub.inputs,_input_values)
+					cur_inputs.append(result)
+				else:
+					cur_inputs.append(sub)
+			print "params ", cur_inputs
+			result = self.executeStep(expr.operator,cur_inputs,_input_values)
+			new_value_table[cur_node]=result
+			print new_value_table
+			print "execute"	
