@@ -56,22 +56,30 @@ class Executor:
 		print "value_table = ",value_table
 		return value_table
 
-	def executeStep(self,op,inputs,_values):
+	def executeStep(self,op,inputs,_values,new_value):
 		print inputs
 		print _values
 		_inputs = []
 		for i in inputs:
 			if type(i) == str:
-				_inputs.append(_values[i])
+				if i=="y":
+					_inputs.append(_values[i])
+				else:
+					if(new_value.has_key(i)):
+						##using as param, use new value
+						_inputs.append(new_value[i])
+					else:
+						_inputs.append(_values[i])
 			elif isinstance(i,Expr):
 				print "Expr! Expr=",i
-				_inputs.append(self.executeStep(i.operator,i.inputs,_values))
+				_inputs.append(self.executeStep(i.operator,i.inputs,_values,new_value))
 			else:
 				_inputs.append(i)
 		print "op ="+str(op)+" inputs="+str(_inputs)
 		if type(op)==int:
 			return op
 		elif type(op)==str:
+			##use as op, should use origin value
 			return _values[op]
 		else:
 			return op().forward(_inputs)
@@ -87,12 +95,12 @@ class Executor:
 			cur_inputs = []
 			for sub in expr.inputs:
 				if(isinstance(sub,Expr)):
-					result = self.executeStep(sub.operator,sub.inputs,_input_values)
+					result = self.executeStep(sub.operator,sub.inputs,_input_values,new_value_table)
 					cur_inputs.append(result)
 				else:
 					cur_inputs.append(sub)
 			print "params ", cur_inputs
-			result = self.executeStep(expr.operator,cur_inputs,_input_values)
+			result = self.executeStep(expr.operator,cur_inputs,_input_values,new_value_table)
 			new_value_table[cur_node]=result
 			print new_value_table
 			print "execute"	

@@ -103,7 +103,7 @@ class Ln(Op):
 class Rev(Op):
 	def forward(self,_inputs):
                 print "forward ln"
-		return 1/_inputs[0]
+		return float(1)/_inputs[0]
 		#return "forward ln",_inputs
 	
 	def backward(self,_inputs,index,*allinput):
