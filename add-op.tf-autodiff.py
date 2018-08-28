@@ -33,7 +33,6 @@ exe = Executor()
 ###not work , feed_dict is tensorflow based concept
 ###value_table = exe.execute(forward_expr_table,feed_dict={"x1":2,"x2":2,"y":3})
 forward_compute_graph,forward_input_table,backward_compute_graph_table = exe.buildComputation(forward_expr_table)
-value_table = exe.execute(forward_compute_graph,forward_input_table,{"x1":2,"x2":5,"y":3})
 
 #x1=Plus(v-1,3)
 #y=
@@ -99,6 +98,8 @@ for k,v in zip(Grad_Map.iterkeys(),Grad_Map.itervalues()):
 print "backward_expr"
 for k,v in zip(backward_expr_table.iterkeys(),backward_expr_table.itervalues()):
 	print k+"="+str(v)
+
+value_table = exe.execute_new(forward_compute_graph,forward_input_table,{"x1":2,"x2":5,"y":3})
 
 
 #while not backward_queue.empty():

@@ -9,7 +9,6 @@ class Executor:
 	
 	def buildComputation(self,expr_table):
 		backward_op_table = {}
-		forward_table = {}
 		forward_input_table = {}
 		forward_op_table = {}
 		for expr in expr_table:
@@ -55,7 +54,7 @@ class Executor:
 		
 		print "value_table = ",value_table
 		return value_table
-
+	
 	def executeStep(self,op,inputs,_values,new_value):
 		print inputs
 		print _values
