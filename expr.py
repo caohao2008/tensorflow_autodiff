@@ -8,11 +8,16 @@ class Expr:
 		self.inputs = _inputs
 		print "init express"	
 
+
 	def __str__(self):
 		expr = ""
 		expr= expr+str(self.operator)+"("
 		for input in self.inputs:
-			expr =  expr + input+","
+			#print type(input)
+			if(isinstance(input,Expr)):
+				expr = expr + str(input) + ","
+			else:
+				expr =  expr + input+","
 		expr = expr[:-1]+")"
 		result = str(self.output)+" = "+expr
 		return result 
